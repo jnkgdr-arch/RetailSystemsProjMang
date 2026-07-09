@@ -1100,3 +1100,70 @@
     font-size: .72rem;
   }
 }
+
+/* Y-axis value labels with dotted guides to matching bars */
+.roles-graph-grid .bar-chart {
+  grid-template-columns: 7.4rem minmax(0, 1fr);
+}
+
+.bar-y-axis span {
+  opacity: 0;
+}
+
+.bar-plot {
+  overflow: visible;
+}
+
+.value-guides {
+  position: absolute;
+  inset: 1rem .75rem 0 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.value-guide {
+  position: absolute;
+  left: 0;
+  top: calc(100% - var(--level));
+  width: calc((var(--bar-index) + .5) * (100% / var(--bar-count)));
+  transform: translateY(-50%);
+}
+
+.value-guide span {
+  position: absolute;
+  left: -.55rem;
+  top: 50%;
+  transform: translate(-100%, -50%);
+  padding: .12rem .35rem;
+  border: 1px solid rgba(255, 209, 102, .28);
+  border-radius: 999px;
+  background: rgba(21, 1, 5, .72);
+  color: #fff2d6;
+  font-size: .72rem;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.value-guide i {
+  position: absolute;
+  left: 0;
+  right: .25rem;
+  top: 50%;
+  border-top: 1px dotted rgba(255, 209, 102, .3);
+}
+
+.chart-bar .bar-value {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .roles-graph-grid .bar-chart {
+    grid-template-columns: 6.2rem minmax(0, 1fr);
+  }
+
+  .value-guide span {
+    font-size: .62rem;
+    padding: .1rem .25rem;
+  }
+}
