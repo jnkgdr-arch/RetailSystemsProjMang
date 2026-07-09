@@ -44,15 +44,10 @@ function renderCostGraph(targetId, dataset){
       <div class="bar-y-axis">${ticks.map(t => `<span>${money(max * t)}</span>`).join('')}</div>
       <div class="bar-plot">
         <div class="bar-grid">${ticks.map(() => '<i></i>').join('')}</div>
-        <div class="value-guides">
-          ${dataset.map((r, index)=>`
-            <div class="value-guide" style="--level:${(r[1]/max)*100}%;--bar-index:${index}">
-              <span>${money(r[1])}</span><i></i>
-            </div>`).join('')}
-        </div>
         <div class="chart-bars">
           ${dataset.map(r=>`
             <button class="chart-bar ${r[3]}" data-index="${roles.indexOf(r)}" title="${r[0]}: ${money(r[1])}">
+              <span class="bar-value">${money(r[1])}</span>
               <i style="--height:${Math.max((r[1]/max)*100, 10)}%"></i>
             </button>`).join('')}
         </div>

@@ -1167,3 +1167,67 @@
     padding: .1rem .25rem;
   }
 }
+
+/* Revert cost labels above bars and increase graph height */
+.value-guides {
+  display: none;
+}
+
+.bar-y-axis span {
+  opacity: 1;
+}
+
+.roles-graph-grid .bar-chart {
+  grid-template-columns: 5.2rem minmax(0, 1fr);
+  min-height: 39rem;
+}
+
+.roles-graph-grid .bar-plot {
+  height: 29rem;
+  overflow: hidden;
+  padding-top: 2.2rem;
+}
+
+.chart-bar i {
+  display: block;
+  padding-top: 0;
+  overflow: visible;
+}
+
+.chart-bar .bar-value {
+  display: block;
+  position: absolute;
+  bottom: calc(var(--height) + .55rem);
+  left: 50%;
+  transform: translateX(-50%);
+  writing-mode: initial;
+  max-width: 4.8rem;
+  padding: .14rem .3rem;
+  border-radius: .45rem;
+  background: rgba(0, 0, 0, .46);
+  color: #fffdf5;
+  font-size: .78rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .7);
+}
+
+@media (max-width: 700px) {
+  .roles-graph-grid .bar-chart {
+    grid-template-columns: 4.2rem minmax(0, 1fr);
+    min-height: 34rem;
+  }
+
+  .roles-graph-grid .bar-plot {
+    height: 24rem;
+  }
+
+  .chart-bar .bar-value {
+    font-size: .64rem;
+    max-width: 3.8rem;
+  }
+}
