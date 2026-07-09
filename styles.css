@@ -152,3 +152,310 @@
     display: none;
   }
 }
+
+/* Connected WBS org-chart/tree refinements */
+.wbs-diagram {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.program-box {
+  justify-self: center;
+  width: min(620px, 100%);
+  display: grid;
+  gap: .45rem;
+  justify-items: center;
+  padding: 1.2rem;
+  border: 1px solid rgba(255, 209, 102, .7);
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(255, 209, 102, .96), rgba(230, 57, 70, .9));
+  color: #230207;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .32);
+}
+
+.program-box strong {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+}
+
+.program-box small {
+  color: #4a0710;
+  font-weight: 900;
+}
+
+.tree-connector {
+  justify-self: center;
+  width: min(92%, 1060px);
+  height: 2.2rem;
+  border-top: 2px solid rgba(255, 209, 102, .72);
+  border-left: 2px solid rgba(255, 209, 102, .72);
+  border-right: 2px solid rgba(255, 209, 102, .72);
+  position: relative;
+}
+
+.tree-connector:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -2.2rem;
+  height: 2.2rem;
+  border-left: 2px solid rgba(255, 209, 102, .72);
+}
+
+.deliverable-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.tree-deliverable {
+  position: relative;
+  display: grid;
+  gap: 1.1rem;
+}
+
+.tree-deliverable:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -1.2rem;
+  height: 1.2rem;
+  border-left: 2px solid rgba(255, 209, 102, .72);
+}
+
+.deliverable-box {
+  width: 100%;
+  min-height: 8.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1.2rem;
+  color: white;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, .055));
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .24);
+  display: grid;
+  gap: .55rem;
+  justify-items: start;
+  align-content: start;
+  padding: 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.deliverable-box strong {
+  color: var(--gold);
+}
+
+.package-branch {
+  display: none;
+  position: relative;
+  gap: .75rem;
+  padding-top: 1.15rem;
+}
+
+.tree-deliverable.open .package-branch {
+  display: grid;
+}
+
+.package-branch:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 1.15rem;
+  border-left: 2px solid rgba(255, 209, 102, .62);
+}
+
+.package-box,
+.package-milestone {
+  position: relative;
+  margin-left: 1rem;
+}
+
+.package-box:before,
+.package-milestone:before {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  top: 50%;
+  width: 1rem;
+  border-top: 2px solid rgba(255, 209, 102, .62);
+}
+
+.package-box:after,
+.package-milestone:after {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  top: -50%;
+  height: 100%;
+  border-left: 2px solid rgba(255, 209, 102, .62);
+}
+
+.package-box {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .35rem .65rem;
+  padding: .8rem;
+  border: 1px solid rgba(255, 255, 255, .13);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, .065);
+}
+
+.package-box b {
+  color: var(--gold);
+}
+
+.package-box span,
+.package-box em {
+  grid-column: 2;
+}
+
+.package-box em {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.package-box small {
+  justify-self: start;
+  background: #520812;
+  border-radius: 999px;
+  padding: .28rem .5rem;
+  font-weight: 900;
+}
+
+.package-milestone {
+  margin-top: .2rem;
+}
+
+.schedule-panel {
+  margin-top: 1rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.gantt-calendar {
+  min-width: 1120px;
+  display: grid;
+  grid-template-columns: 15rem repeat(36, 1fr);
+  gap: .25rem;
+  align-items: center;
+}
+
+.gantt-label,
+.week-cell {
+  min-height: 2rem;
+  display: grid;
+  align-items: center;
+  padding: .35rem .45rem;
+  border-radius: .55rem;
+  background: rgba(255, 255, 255, .06);
+  color: #ffdede;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.gantt-label.heading,
+.week-cell {
+  color: var(--gold);
+  text-align: center;
+}
+
+.gantt-row {
+  display: contents;
+}
+
+.gantt-track {
+  position: relative;
+  grid-column: 2 / -1;
+  min-height: 2.85rem;
+  border-radius: .7rem;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.055) 0, rgba(255,255,255,.055) calc(100% / 36 - 1px), rgba(255,255,255,.13) calc(100% / 36 - 1px), rgba(255,255,255,.13) calc(100% / 36));
+  overflow: hidden;
+}
+
+.gantt-bar {
+  position: absolute;
+  left: calc((var(--start) - 1) * (100% / 36));
+  width: calc(var(--duration) * (100% / 36));
+  top: .45rem;
+  bottom: .45rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  padding: 0 .7rem;
+  background: linear-gradient(90deg, #9d0208, #e63946, #ffba08);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .28);
+  font-size: .76rem;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gantt-milestone {
+  position: absolute;
+  left: calc((var(--point) - .5) * (100% / 36));
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .75);
+  font-size: 1.1rem;
+  z-index: 2;
+}
+
+.schedule-legend {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  color: #ffdede;
+  font-weight: 800;
+}
+
+.legend-bar {
+  display: inline-block;
+  width: 2rem;
+  height: .7rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #9d0208, #e63946, #ffba08);
+  margin-right: .35rem;
+}
+
+.legend-mile {
+  color: var(--gold);
+  font-style: normal;
+  margin-right: .35rem;
+}
+
+@media (max-width: 1000px) {
+  .deliverable-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .tree-connector,
+  .tree-connector:before,
+  .tree-deliverable:before {
+    display: none;
+  }
+
+  .deliverable-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .package-box {
+    grid-template-columns: 1fr;
+  }
+
+  .package-box span,
+  .package-box em {
+    grid-column: auto;
+  }
+
+  .gantt-calendar {
+    min-width: 820px;
+    grid-template-columns: 11rem repeat(36, 1fr);
+  }
+}

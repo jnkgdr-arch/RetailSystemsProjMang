@@ -44,33 +44,69 @@ function showRole(index){
   document.getElementById('roleDetail').innerHTML = `<span class="pill">${type === 'people' ? 'Role' : 'Asset'}</span><h3>${name}</h3><div class="big-cost">${money(cost)}</div><p>${responsibility}</p>`;
 }
 function renderWbs(){
-  document.getElementById('timeline').innerHTML = wbs.map((phase, index)=>{
+  const diagram = document.getElementById('timeline');
+  const deliverables = wbs.map((phase, index)=>{
     const levelNumber = phase[0].split('.')[0];
     return `
-    <article class="wbs-level ${index < 2 ? 'open' : ''}">
-      <button class="level-head" aria-expanded="${index < 2}">
-        <span class="level-badge">Level ${levelNumber}</span>
-        <span class="level-title">${phase[0]}</span>
-        <strong>${phase[1].length} work packages</strong>
-      </button>
-      <div class="level-body">
-        <div class="level-tree">
-          <div class="parent-node">${phase[0]}<small>Parent deliverable</small></div>
-          <div class="child-nodes">
-            ${phase[1].map(task=>`
-              <div class="work-package">
-                <b>${task[0]}</b>
-                <span>${task[1]}</span>
-                <em>${task[2]}</em>
-                <small>${task[3]}</small>
-              </div>`).join('')}
-          </div>
+      <article class="tree-deliverable open">
+        <button class="deliverable-box" aria-expanded="true">
+          <span class="level-badge">Level 2.${levelNumber}</span>
+          <span class="level-title">${phase[0]}</span>
+          <strong>${phase[1].length} work packages</strong>
+        </button>
+        <div class="package-branch">
+          ${phase[1].map(task=>`
+            <div class="package-box">
+              <b>${task[0]}</b>
+              <span>${task[1]}</span>
+              <em>${task[2]}</em>
+              <small>${task[3]}</small>
+            </div>`).join('')}
+          <div class="milestone package-milestone">◆ Milestone: ${phase[2]}</div>
         </div>
-        <div class="milestone">◆ Milestone: ${phase[2]}</div>
-      </div>
-    </article>`;
+      </article>`;
   }).join('');
-  document.querySelectorAll('.level-head').forEach(btn => btn.addEventListener('click', () => {
+
+  const scheduleRows = wbs.map((phase, index)=>{
+    const start = (index * 4) + 1;
+    const duration = 4;
+    return `
+      <div class="gantt-row">
+        <div class="gantt-label">${phase[0]}</div>
+        <div class="gantt-track">
+          <div class="gantt-bar" style="--start:${start};--duration:${duration}">
+            <span>${phase[1].map(task => task[0]).join(', ')}</span>
+          </div>
+          <div class="gantt-milestone" style="--point:${start + duration - 1}" title="${phase[2]}">◆</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  diagram.innerHTML = `
+    <div class="program-box">
+      <span class="level-badge">Level 1</span>
+      <strong>Retail Inventory Management System Implementation</strong>
+      <small>Main project / program</small>
+    </div>
+    <div class="tree-connector" aria-hidden="true"></div>
+    <div class="deliverable-grid">${deliverables}</div>
+    <section class="schedule-panel" aria-label="Project timeline mini Gantt chart">
+      <div class="section-heading">
+        <p class="eyebrow">Project Timeline / Schedule</p>
+        <h3>Mini Gantt view by WBS phase</h3>
+      </div>
+      <div class="gantt-calendar">
+        <div class="gantt-label heading">WBS Phase</div>
+        ${Array.from({length: 36}, (_, i) => `<div class="week-cell">W${i + 1}</div>`).join('')}
+        ${scheduleRows}
+      </div>
+      <div class="schedule-legend">
+        <span><i class="legend-bar"></i> Activity window</span>
+        <span><i class="legend-mile">◆</i> Milestone checkpoint</span>
+      </div>
+    </section>`;
+
+  document.querySelectorAll('.deliverable-box').forEach(btn => btn.addEventListener('click', () => {
     const level = btn.parentElement;
     level.classList.toggle('open');
     btn.setAttribute('aria-expanded', level.classList.contains('open'));
@@ -79,11 +115,11 @@ function renderWbs(){
 
 document.getElementById('roleFilter').addEventListener('change', e => renderRoles(e.target.value));
 document.getElementById('expandAll').addEventListener('click', e => {
-  const levels = [...document.querySelectorAll('.wbs-level')];
+  const levels = [...document.querySelectorAll('.tree-deliverable')];
   const allOpen = levels.every(p => p.classList.contains('open'));
   levels.forEach(p => {
     p.classList.toggle('open', !allOpen);
-    p.querySelector('.level-head').setAttribute('aria-expanded', String(!allOpen));
+    p.querySelector('.deliverable-box').setAttribute('aria-expanded', String(!allOpen));
   });
   e.target.textContent = allOpen ? 'Expand all levels' : 'Collapse all levels';
 });
