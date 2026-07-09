@@ -44,23 +44,48 @@ function showRole(index){
   document.getElementById('roleDetail').innerHTML = `<span class="pill">${type === 'people' ? 'Role' : 'Asset'}</span><h3>${name}</h3><div class="big-cost">${money(cost)}</div><p>${responsibility}</p>`;
 }
 function renderWbs(){
-  document.getElementById('timeline').innerHTML = wbs.map((phase, index)=>`
-    <article class="phase ${index < 2 ? 'open' : ''}">
-      <button class="phase-head"><span>${phase[0]}</span><strong>${phase[1].length} tasks</strong></button>
-      <div class="phase-body">
-        ${phase[1].map(task=>`<div class="task"><b>${task[0]}</b><span>${task[1]}</span><em>${task[2]}</em><small>${task[3]}</small></div>`).join('')}
+  document.getElementById('timeline').innerHTML = wbs.map((phase, index)=>{
+    const levelNumber = phase[0].split('.')[0];
+    return `
+    <article class="wbs-level ${index < 2 ? 'open' : ''}">
+      <button class="level-head" aria-expanded="${index < 2}">
+        <span class="level-badge">Level ${levelNumber}</span>
+        <span class="level-title">${phase[0]}</span>
+        <strong>${phase[1].length} work packages</strong>
+      </button>
+      <div class="level-body">
+        <div class="level-tree">
+          <div class="parent-node">${phase[0]}<small>Parent deliverable</small></div>
+          <div class="child-nodes">
+            ${phase[1].map(task=>`
+              <div class="work-package">
+                <b>${task[0]}</b>
+                <span>${task[1]}</span>
+                <em>${task[2]}</em>
+                <small>${task[3]}</small>
+              </div>`).join('')}
+          </div>
+        </div>
         <div class="milestone">◆ Milestone: ${phase[2]}</div>
       </div>
-    </article>`).join('');
-  document.querySelectorAll('.phase-head').forEach(btn => btn.addEventListener('click', () => btn.parentElement.classList.toggle('open')));
+    </article>`;
+  }).join('');
+  document.querySelectorAll('.level-head').forEach(btn => btn.addEventListener('click', () => {
+    const level = btn.parentElement;
+    level.classList.toggle('open');
+    btn.setAttribute('aria-expanded', level.classList.contains('open'));
+  }));
 }
 
 document.getElementById('roleFilter').addEventListener('change', e => renderRoles(e.target.value));
 document.getElementById('expandAll').addEventListener('click', e => {
-  const phases = [...document.querySelectorAll('.phase')];
-  const allOpen = phases.every(p => p.classList.contains('open'));
-  phases.forEach(p => p.classList.toggle('open', !allOpen));
-  e.target.textContent = allOpen ? 'Expand all phases' : 'Collapse all phases';
+  const levels = [...document.querySelectorAll('.wbs-level')];
+  const allOpen = levels.every(p => p.classList.contains('open'));
+  levels.forEach(p => {
+    p.classList.toggle('open', !allOpen);
+    p.querySelector('.level-head').setAttribute('aria-expanded', String(!allOpen));
+  });
+  e.target.textContent = allOpen ? 'Expand all levels' : 'Collapse all levels';
 });
 renderRoles();
 renderWbs();
