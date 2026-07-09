@@ -1087,3 +1087,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Larger in-bar cost labels for readability */
+.chart-bar .bar-value {
+  font-size: .86rem;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+
+@media (max-width: 700px) {
+  .chart-bar .bar-value {
+    font-size: .72rem;
+  }
+}
