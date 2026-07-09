@@ -38,16 +38,25 @@ function renderRoles(){
 function renderCostGraph(targetId, dataset){
   const chart = document.getElementById(targetId);
   const max = Math.max(...dataset.map(r => r[1]));
+  const ticks = [0, .25, .5, .75, 1];
   chart.innerHTML = `
-    <div class="row-bars">
-      ${dataset.map(r=>`
-        <button class="row-bar ${r[3]}" data-index="${roles.indexOf(r)}">
-          <span class="row-label">${r[0]}</span>
-          <span class="row-track">
-            <i style="--width:${Math.max((r[1]/max)*100, 8)}%"></i>
-            <strong>${money(r[1])}</strong>
-          </span>
-        </button>`).join('')}
+    <div class="hbar-chart">
+      <div class="chart-y-title">Cost items</div>
+      <div class="chart-plot">
+        <div class="chart-grid">${ticks.slice(1).map(t => `<i style="left:${t * 100}%"></i>`).join('')}</div>
+        <div class="row-bars">
+          ${dataset.map(r=>`
+            <button class="row-bar ${r[3]}" data-index="${roles.indexOf(r)}">
+              <span class="row-label">${r[0]}</span>
+              <span class="row-track">
+                <i style="--width:${Math.max((r[1]/max)*100, 8)}%"></i>
+                <strong>${money(r[1])}</strong>
+              </span>
+            </button>`).join('')}
+        </div>
+      </div>
+      <div class="chart-x-title">Cost</div>
+      <div class="chart-x-axis">${ticks.map(t => `<span>${money(max * t)}</span>`).join('')}</div>
     </div>`;
   chart.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => showRole(+btn.dataset.index)));
 }
