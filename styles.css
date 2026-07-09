@@ -1013,3 +1013,60 @@
     font-size: .58rem;
   }
 }
+
+/* Give each cost graph a full-width row and keep cost values inside bars */
+.roles-graph-grid {
+  grid-template-columns: 1fr;
+}
+
+.roles-graph-grid .graph-card {
+  width: 100%;
+}
+
+.roles-graph-grid .bar-chart {
+  min-height: 34rem;
+}
+
+.roles-graph-grid .bar-plot {
+  height: 24rem;
+  padding-top: 1rem;
+}
+
+.chart-bar i {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: .35rem;
+  overflow: visible;
+}
+
+.chart-bar .bar-value {
+  position: static;
+  max-width: calc(100% + 2rem);
+  padding: .16rem .3rem;
+  border-radius: .45rem;
+  background: rgba(0, 0, 0, .42);
+  color: #fffdf5;
+  font-size: .68rem;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .7);
+}
+
+@media (max-width: 700px) {
+  .roles-graph-grid .bar-chart {
+    min-height: 31rem;
+  }
+
+  .roles-graph-grid .bar-plot {
+    height: 20rem;
+  }
+
+  .chart-bar .bar-value {
+    font-size: .58rem;
+    padding: .12rem .2rem;
+  }
+}

@@ -47,8 +47,7 @@ function renderCostGraph(targetId, dataset){
         <div class="chart-bars">
           ${dataset.map(r=>`
             <button class="chart-bar ${r[3]}" data-index="${roles.indexOf(r)}" title="${r[0]}: ${money(r[1])}">
-              <span class="bar-value">${money(r[1])}</span>
-              <i style="--height:${Math.max((r[1]/max)*100, 8)}%"></i>
+              <i style="--height:${Math.max((r[1]/max)*100, 10)}%"><span class="bar-value">${money(r[1])}</span></i>
             </button>`).join('')}
         </div>
       </div>
