@@ -857,3 +857,159 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Restored vertical bar charts with contained labels */
+.roles-graph-grid .bar-chart {
+  display: grid;
+  grid-template-columns: 4.8rem minmax(0, 1fr);
+  grid-template-areas:
+    "y plot"
+    "spacer labels";
+  gap: .55rem .75rem;
+  min-height: 30rem;
+}
+
+.bar-y-axis {
+  grid-area: y;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: .7rem;
+  font-weight: 900;
+  text-align: right;
+  padding: .6rem 0 0;
+}
+
+.bar-plot {
+  grid-area: plot;
+  position: relative;
+  min-width: 0;
+  height: 21rem;
+  padding: .6rem .75rem 0;
+  border-left: 2px solid rgba(255, 209, 102, .72);
+  border-bottom: 2px solid rgba(255, 209, 102, .72);
+  border-radius: .8rem .8rem 0 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+  overflow: hidden;
+}
+
+.bar-grid {
+  position: absolute;
+  inset: .6rem .75rem 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.bar-grid i {
+  border-top: 1px dashed rgba(255, 255, 255, .14);
+}
+
+.chart-bars {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(var(--bar-count, auto-fit), minmax(1.6rem, 1fr));
+  grid-auto-flow: column;
+  gap: .45rem;
+  align-items: end;
+}
+
+.chart-bar {
+  position: relative;
+  height: 100%;
+  min-width: 0;
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  border: 0;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+}
+
+.chart-bar i {
+  width: min(100%, 2.6rem);
+  height: var(--height);
+  min-height: 1rem;
+  border-radius: .55rem .55rem 0 0;
+  background: linear-gradient(180deg, #ffba08, #e63946, #9d0208);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+}
+
+.chart-bar.assets i {
+  background: linear-gradient(180deg, #ffd166, #f48c06, #6a040f);
+}
+
+.chart-bar.active i,
+.chart-bar:hover i {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.chart-bar .bar-value {
+  position: absolute;
+  bottom: calc(var(--height) + .45rem);
+  max-width: 4.2rem;
+  color: var(--gold);
+  font-size: .64rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  writing-mode: initial;
+  transform: none;
+}
+
+.bar-x-spacer {
+  grid-area: spacer;
+}
+
+.bar-x-labels {
+  grid-area: labels;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--bar-count, auto-fit), minmax(1.6rem, 1fr));
+  grid-auto-flow: column;
+  gap: .45rem;
+  padding: .45rem .75rem 0;
+}
+
+.bar-x-labels span {
+  min-width: 0;
+  color: #ffdede;
+  font-size: .64rem;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+  .roles-graph-grid .bar-chart {
+    grid-template-columns: 3.9rem minmax(0, 1fr);
+  }
+
+  .bar-plot {
+    height: 18rem;
+  }
+
+  .chart-bars,
+  .bar-x-labels {
+    gap: .28rem;
+  }
+
+  .bar-x-labels span {
+    font-size: .58rem;
+  }
+}

@@ -38,31 +38,30 @@ function renderRoles(){
 function renderCostGraph(targetId, dataset){
   const chart = document.getElementById(targetId);
   const max = Math.max(...dataset.map(r => r[1]));
-  const ticks = [0, .25, .5, .75, 1];
+  const ticks = [1, .75, .5, .25, 0];
   chart.innerHTML = `
-    <div class="hbar-chart">
-      <div class="chart-y-title">Cost items</div>
-      <div class="chart-plot">
-        <div class="chart-grid">${ticks.slice(1).map(t => `<i style="left:${t * 100}%"></i>`).join('')}</div>
-        <div class="row-bars">
+    <div class="bar-chart" style="--bar-count:${dataset.length}">
+      <div class="bar-y-axis">${ticks.map(t => `<span>${money(max * t)}</span>`).join('')}</div>
+      <div class="bar-plot">
+        <div class="bar-grid">${ticks.map(() => '<i></i>').join('')}</div>
+        <div class="chart-bars">
           ${dataset.map(r=>`
-            <button class="row-bar ${r[3]}" data-index="${roles.indexOf(r)}">
-              <span class="row-label">${r[0]}</span>
-              <span class="row-track">
-                <i style="--width:${Math.max((r[1]/max)*100, 8)}%"></i>
-                <strong>${money(r[1])}</strong>
-              </span>
+            <button class="chart-bar ${r[3]}" data-index="${roles.indexOf(r)}" title="${r[0]}: ${money(r[1])}">
+              <span class="bar-value">${money(r[1])}</span>
+              <i style="--height:${Math.max((r[1]/max)*100, 8)}%"></i>
             </button>`).join('')}
         </div>
       </div>
-      <div class="chart-x-title">Cost</div>
-      <div class="chart-x-axis">${ticks.map(t => `<span>${money(max * t)}</span>`).join('')}</div>
+      <div class="bar-x-spacer"></div>
+      <div class="bar-x-labels">
+        ${dataset.map(r=>`<span title="${r[0]}">${r[0]}</span>`).join('')}
+      </div>
     </div>`;
   chart.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => showRole(+btn.dataset.index)));
 }
 function showRole(index){
   const [name,cost,responsibility,type] = roles[index];
-  document.querySelectorAll('.row-bar').forEach(b => b.classList.toggle('active', +b.dataset.index === index));
+  document.querySelectorAll('.chart-bar').forEach(b => b.classList.toggle('active', +b.dataset.index === index));
   document.getElementById('roleDetail').innerHTML = `<span class="pill">${type === 'people' ? 'Role' : 'Asset'}</span><h3>${name}</h3><div class="big-cost">${money(cost)}</div><p>${responsibility}</p>`;
 }
 function renderWbs(){
