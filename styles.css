@@ -1231,3 +1231,10 @@
     max-width: 3.8rem;
   }
 }
+
+/* Position each cost label directly above its matching bar */
+.chart-bar .bar-value {
+  bottom: calc(var(--height) + .28rem);
+  left: 50%;
+  transform: translateX(-50%);
+}
