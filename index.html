@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retail Inventory Systems Implementation Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <header class="hero">
+    <nav class="topbar">
+      <div class="brand"><span class="brand-mark">R</span> RIMS Implementation</div>
+      <div class="nav-links">
+        <a href="#background">Background</a>
+        <a href="#scope">Scope</a>
+        <a href="#roles">Roles</a>
+        <a href="#wbs">WBS</a>
+      </div>
+    </nav>
+    <section class="hero-grid">
+      <div class="hero-copy">
+        <p class="student-credit">Janelle Gardner: Project Management</p>
+        <p class="eyebrow">Retail Inventory Management System</p>
+        <h1>Interactive project dashboard for a region-wide inventory transformation.</h1>
+        <p class="hero-text">A mid-size retailer is replacing manual updates and disconnected spreadsheets with a centralized RIMS platform, handheld scanning, POS integration, backup recovery, testing, training, and go-live support.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#wbs">Explore WBS</a>
+          <a class="button secondary" href="#roles">View Budget Roles</a>
+        </div>
+      </div>
+      <div class="hero-card image-card">
+        <img src="assets/clothing-store.jpg" alt="Clothing store shelves and retail floor" />
+        <div class="floating-stat"><strong>9</strong><span>project phases</span></div>
+        <div class="floating-stat second"><strong>36</strong><span>WBS tasks</span></div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section id="background" class="panel section-grid">
+      <div>
+        <p class="eyebrow">Business Overview</p>
+        <h2>Why the project exists</h2>
+        <p>The retailer operates several regional store locations and is experiencing frequent inventory errors, inaccurate stock levels, delayed restocking, higher operating costs, lost sales opportunities, and customer dissatisfaction because the current process depends on manual updates and disconnected spreadsheets.</p>
+        <p>The RIMS implementation supports operational accuracy, customer experience, scalable growth, and data-driven decision-making through real-time visibility and integrated inventory data.</p>
+      </div>
+      <div class="problem-chart" aria-label="Operational problems chart">
+        <div class="bar" style="--value:88"><span>Inventory errors</span><strong>88%</strong></div>
+        <div class="bar" style="--value:80"><span>Stock visibility gaps</span><strong>80%</strong></div>
+        <div class="bar" style="--value:72"><span>Delayed restocking</span><strong>72%</strong></div>
+        <div class="bar" style="--value:64"><span>Lost sales risk</span><strong>64%</strong></div>
+      </div>
+    </section>
+
+    <section class="panel objectives">
+      <div class="section-heading">
+        <p class="eyebrow">Project Purpose & Objectives</p>
+        <h2>Target outcomes</h2>
+      </div>
+      <div class="objective-wheel">
+        <article><strong>01</strong><span>Improve inventory accuracy by reducing human error and automating stock updates.</span></article>
+        <article><strong>02</strong><span>Provide real-time stock visibility across all store locations.</span></article>
+        <article><strong>03</strong><span>Increase customer satisfaction through faster product search and item availability.</span></article>
+        <article><strong>04</strong><span>Integrate inventory data with financial and sales systems for reporting and forecasting.</span></article>
+        <article><strong>05</strong><span>Deliver a scalable system for future growth and expansion.</span></article>
+      </div>
+    </section>
+
+    <section id="scope" class="panel scope-panel">
+      <div class="section-heading">
+        <p class="eyebrow">Project Scope</p>
+        <h2>Included vs. excluded</h2>
+      </div>
+      <div class="scope-grid">
+        <div class="scope-card included">
+          <h3>Included in Scope</h3>
+          <ul>
+            <li>Inventory management software and handheld scanners</li>
+            <li>Integration with the existing POS system</li>
+            <li>Current inventory data migration</li>
+            <li>Staff training and change management</li>
+            <li>Data backup and recovery procedures</li>
+          </ul>
+        </div>
+        <div class="scope-card excluded">
+          <h3>Excluded from Scope</h3>
+          <ul>
+            <li>POS system redevelopment</li>
+            <li>Expansion to locations outside the current network infrastructure</li>
+            <li>Marketing or customer-facing system enhancements</li>
+          </ul>
+        </div>
+        <div class="scope-visual">
+          <img src="assets/atmos-shopper.jpg" alt="Retail shoppers in store atmosphere" />
+          <div class="donut" role="img" aria-label="Scope split: five included items, three excluded items"><span>5:3</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roles" class="panel roles-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Roles, Costs & Responsibilities</p>
+          <h2>Annual people and system asset cost graphs</h2>
+        </div>
+      </div>
+      <div class="roles-graph-grid">
+        <article class="graph-card">
+          <h3>Role costs</h3>
+          <p class="axis-note">X-axis: role • Y-axis: annual cost</p>
+          <div class="vertical-chart" id="peopleCostChart"></div>
+        </article>
+        <article class="graph-card">
+          <h3>System asset costs</h3>
+          <p class="axis-note">X-axis: system asset • Y-axis: cost</p>
+          <div class="vertical-chart" id="assetCostChart"></div>
+        </article>
+      </div>
+      <div class="role-detail" id="roleDetail">
+        <h3>Select a graph bar</h3>
+        <p>Click any bar to view responsibilities or implementation relevance.</p>
+      </div>
+    </section>
+
+    <section id="wbs" class="panel wbs-panel">
+      <div class="section-heading with-control">
+        <div>
+          <p class="eyebrow">Work Breakdown Structure</p>
+          <h2>Connected WBS tree and project schedule</h2>
+        </div>
+        <button id="expandAll" class="button secondary">Collapse all levels</button>
+      </div>
+      <p class="wbs-intro">Browse the implementation plan as a connected hierarchy from the overall program to major deliverables and detailed work packages, then review the schedule map below for execution order and milestone checkpoints.</p>
+      <div class="wbs-diagram" id="timeline"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>RIMS Project Management Dashboard</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
