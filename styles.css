@@ -1070,3 +1070,20 @@
     padding: .12rem .2rem;
   }
 }
+
+/* Rotate cost values vertically inside each cost bar */
+.chart-bar i {
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
+}
+
+.chart-bar .bar-value {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  max-width: none;
+  max-height: calc(100% - .5rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
