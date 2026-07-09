@@ -459,3 +459,208 @@
     grid-template-columns: 11rem repeat(36, 1fr);
   }
 }
+
+/* Two-column role cost graphs */
+.roles-graph-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.graph-card {
+  min-width: 0;
+  padding: 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: rgba(0, 0, 0, .22);
+}
+
+.graph-card h3 {
+  margin-bottom: .25rem;
+}
+
+.axis-note {
+  color: var(--muted);
+  font-size: .86rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.vertical-chart {
+  min-height: 26rem;
+  display: grid;
+  grid-template-columns: 4.8rem minmax(0, 1fr);
+  gap: .75rem;
+}
+
+.y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 5.8rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 800;
+  text-align: right;
+}
+
+.plot-area {
+  position: relative;
+  min-width: 0;
+  border-left: 2px solid rgba(255, 209, 102, .7);
+  border-bottom: 2px solid rgba(255, 209, 102, .7);
+  padding: 1rem .7rem 5.8rem;
+}
+
+.grid-lines {
+  position: absolute;
+  inset: 1rem .7rem 5.8rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.grid-lines i {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+.x-bars {
+  position: relative;
+  z-index: 1;
+  height: 19rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(2.25rem, 1fr));
+  align-items: end;
+  gap: .55rem;
+}
+
+.vbar {
+  position: relative;
+  height: 100%;
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  border: 0;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+}
+
+.vbar i {
+  width: 100%;
+  height: var(--height);
+  min-height: 1.2rem;
+  border-radius: .55rem .55rem 0 0;
+  background: linear-gradient(180deg, #ffba08, #e63946, #9d0208);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+}
+
+.vbar.assets i {
+  background: linear-gradient(180deg, #ffd166, #f48c06, #6a040f);
+}
+
+.vbar.active i {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.bar-value {
+  position: absolute;
+  bottom: calc(var(--height) + .35rem);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: var(--gold);
+  font-size: .68rem;
+  font-weight: 900;
+}
+
+.vbar small {
+  position: absolute;
+  top: calc(100% + .45rem);
+  width: 7rem;
+  transform: rotate(-38deg);
+  transform-origin: top left;
+  color: #ffdede;
+  font-size: .68rem;
+  font-weight: 900;
+  text-align: left;
+}
+
+.roles-panel .role-detail {
+  margin-top: 1rem;
+}
+
+/* True two-column WBS tree + schedule layout */
+.wbs-two-column {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(420px, .92fr);
+  gap: 1.35rem;
+  align-items: start;
+}
+
+.tree-panel,
+.schedule-panel {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1.4rem;
+  background: rgba(0, 0, 0, .18);
+}
+
+.wbs-two-column .schedule-panel {
+  margin-top: 0;
+  padding-top: 1rem;
+  overflow-x: auto;
+}
+
+.wbs-two-column .deliverable-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.wbs-two-column .tree-connector {
+  width: min(90%, 660px);
+}
+
+.wbs-two-column .gantt-calendar {
+  min-width: 760px;
+  grid-template-columns: 10rem repeat(36, 1fr);
+}
+
+.wbs-two-column .gantt-bar span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1180px) {
+  .wbs-two-column,
+  .roles-graph-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wbs-two-column .deliverable-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .vertical-chart {
+    grid-template-columns: 4.2rem minmax(0, 1fr);
+  }
+
+  .x-bars {
+    gap: .35rem;
+  }
+
+  .vbar small {
+    width: 5.75rem;
+    font-size: .62rem;
+  }
+
+  .wbs-two-column .deliverable-grid {
+    grid-template-columns: 1fr;
+  }
+}

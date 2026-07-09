@@ -103,23 +103,27 @@
     </section>
 
     <section id="roles" class="panel roles-panel">
-      <div class="section-heading with-control">
+      <div class="section-heading">
         <div>
           <p class="eyebrow">Roles, Costs & Responsibilities</p>
-          <h2>Annual role cost dashboard</h2>
+          <h2>Annual people and system asset cost graphs</h2>
         </div>
-        <select id="roleFilter" aria-label="Filter roles">
-          <option value="all">All roles and assets</option>
-          <option value="people">People only</option>
-          <option value="assets">System assets only</option>
-        </select>
       </div>
-      <div class="roles-layout">
-        <div class="cost-chart" id="costChart"></div>
-        <div class="role-detail" id="roleDetail">
-          <h3>Select a bar</h3>
-          <p>Click any cost bar to view responsibilities and implementation relevance.</p>
-        </div>
+      <div class="roles-graph-grid">
+        <article class="graph-card">
+          <h3>Role costs</h3>
+          <p class="axis-note">X-axis: role • Y-axis: annual cost</p>
+          <div class="vertical-chart" id="peopleCostChart"></div>
+        </article>
+        <article class="graph-card">
+          <h3>System asset costs</h3>
+          <p class="axis-note">X-axis: system asset • Y-axis: cost</p>
+          <div class="vertical-chart" id="assetCostChart"></div>
+        </article>
+      </div>
+      <div class="role-detail" id="roleDetail">
+        <h3>Select a graph bar</h3>
+        <p>Click any bar to view responsibilities or implementation relevance.</p>
       </div>
     </section>
 

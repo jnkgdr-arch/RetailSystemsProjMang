@@ -30,17 +30,33 @@ const wbs = [
 ];
 
 function money(value){ return value.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}); }
-function renderRoles(filter='all'){
-  const chart = document.getElementById('costChart');
-  const shown = roles.filter(r => filter === 'all' || r[3] === filter);
-  const max = Math.max(...shown.map(r => r[1]));
-  chart.innerHTML = shown.map((r,i)=>`<button class="cost-bar ${r[3]}" data-index="${roles.indexOf(r)}" style="--width:${(r[1]/max)*100}%"><span>${r[0]}</span><i>${money(r[1])}</i></button>`).join('');
+function renderRoles(){
+  renderCostGraph('peopleCostChart', roles.filter(r => r[3] === 'people'));
+  renderCostGraph('assetCostChart', roles.filter(r => r[3] === 'assets'));
+  showRole(0);
+}
+function renderCostGraph(targetId, dataset){
+  const chart = document.getElementById(targetId);
+  const max = Math.max(...dataset.map(r => r[1]));
+  const ticks = [1, .75, .5, .25, 0];
+  chart.innerHTML = `
+    <div class="y-axis">${ticks.map(t => `<span>${money(max * t)}</span>`).join('')}</div>
+    <div class="plot-area">
+      <div class="grid-lines">${ticks.map(() => '<i></i>').join('')}</div>
+      <div class="x-bars">
+        ${dataset.map(r=>`
+          <button class="vbar ${r[3]}" data-index="${roles.indexOf(r)}" style="--height:${Math.max((r[1]/max)*100, 8)}%">
+            <span class="bar-value">${money(r[1])}</span>
+            <i></i>
+            <small>${r[0]}</small>
+          </button>`).join('')}
+      </div>
+    </div>`;
   chart.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => showRole(+btn.dataset.index)));
-  showRole(roles.indexOf(shown[0]));
 }
 function showRole(index){
   const [name,cost,responsibility,type] = roles[index];
-  document.querySelectorAll('.cost-bar').forEach(b => b.classList.toggle('active', +b.dataset.index === index));
+  document.querySelectorAll('.vbar').forEach(b => b.classList.toggle('active', +b.dataset.index === index));
   document.getElementById('roleDetail').innerHTML = `<span class="pill">${type === 'people' ? 'Role' : 'Asset'}</span><h3>${name}</h3><div class="big-cost">${money(cost)}</div><p>${responsibility}</p>`;
 }
 function renderWbs(){
@@ -83,14 +99,17 @@ function renderWbs(){
   }).join('');
 
   diagram.innerHTML = `
-    <div class="program-box">
-      <span class="level-badge">Level 1</span>
-      <strong>Retail Inventory Management System Implementation</strong>
-      <small>Main project / program</small>
-    </div>
-    <div class="tree-connector" aria-hidden="true"></div>
-    <div class="deliverable-grid">${deliverables}</div>
-    <section class="schedule-panel" aria-label="Project timeline mini Gantt chart">
+    <div class="wbs-two-column">
+      <section class="tree-panel" aria-label="Connected WBS tree">
+        <div class="program-box">
+          <span class="level-badge">Level 1</span>
+          <strong>Retail Inventory Management System Implementation</strong>
+          <small>Main project / program</small>
+        </div>
+        <div class="tree-connector" aria-hidden="true"></div>
+        <div class="deliverable-grid">${deliverables}</div>
+      </section>
+      <section class="schedule-panel" aria-label="Project timeline mini Gantt chart">
       <div class="section-heading">
         <p class="eyebrow">Project Timeline / Schedule</p>
         <h3>Mini Gantt view by WBS phase</h3>
@@ -104,7 +123,8 @@ function renderWbs(){
         <span><i class="legend-bar"></i> Activity window</span>
         <span><i class="legend-mile">◆</i> Milestone checkpoint</span>
       </div>
-    </section>`;
+      </section>
+    </div>`;
 
   document.querySelectorAll('.deliverable-box').forEach(btn => btn.addEventListener('click', () => {
     const level = btn.parentElement;
@@ -113,7 +133,6 @@ function renderWbs(){
   }));
 }
 
-document.getElementById('roleFilter').addEventListener('change', e => renderRoles(e.target.value));
 document.getElementById('expandAll').addEventListener('click', e => {
   const levels = [...document.querySelectorAll('.tree-deliverable')];
   const allOpen = levels.every(p => p.classList.contains('open'));
