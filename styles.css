@@ -1238,3 +1238,328 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
+/* Compact global layout refinements */
+body {
+  font-size: 15px;
+}
+
+h1 {
+  font-size: clamp(2.05rem, 4.8vw, 4.8rem);
+  line-height: .98;
+  margin-bottom: .7rem;
+}
+
+h2 {
+  font-size: clamp(1.45rem, 2.45vw, 2.45rem);
+  line-height: 1.08;
+  margin-bottom: .65rem;
+}
+
+h3 {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.12;
+  margin-bottom: .45rem;
+}
+
+p {
+  margin-bottom: .7rem;
+}
+
+ul {
+  margin-top: .4rem;
+  margin-bottom: .45rem;
+  padding-left: 1.15rem;
+}
+
+li + li {
+  margin-top: .18rem;
+}
+
+.hero-text,
+p,
+li {
+  line-height: 1.48;
+}
+
+.topbar {
+  padding: .85rem clamp(.85rem, 3.2vw, 3rem);
+}
+
+.brand-mark {
+  width: 1.85rem;
+  height: 1.85rem;
+  margin-right: .4rem;
+}
+
+.nav-links {
+  gap: .75rem;
+}
+
+.hero-grid {
+  gap: 1.35rem;
+  padding: clamp(2rem, 5vw, 3.1rem) clamp(.9rem, 4vw, 4rem);
+}
+
+.eyebrow {
+  margin-bottom: .45rem;
+  font-size: .72rem;
+}
+
+.student-credit {
+  font-size: clamp(.92rem, 1.55vw, 1.18rem);
+  margin-bottom: .65rem;
+  padding: .42rem .72rem;
+}
+
+.hero-actions {
+  gap: .7rem;
+  margin-top: 1.25rem;
+}
+
+.button,
+select {
+  padding: .68rem .95rem;
+}
+
+.image-card {
+  min-height: clamp(18rem, 34vw, 24rem);
+  max-height: 28rem;
+  border-radius: 1.45rem;
+}
+
+.image-card img,
+.scope-visual img {
+  max-height: 100%;
+}
+
+.floating-stat {
+  padding: .7rem .85rem;
+  border-radius: .9rem;
+}
+
+.floating-stat.second {
+  bottom: 5rem;
+}
+
+.floating-stat strong {
+  font-size: 1.55rem;
+}
+
+main {
+  padding: 0 clamp(.9rem, 3.2vw, 3rem) 2rem;
+}
+
+.panel {
+  margin-bottom: 1rem;
+  padding: clamp(.95rem, 2.2vw, 1.55rem);
+  border-radius: 1.45rem;
+}
+
+.section-grid,
+.scope-grid,
+.roles-layout,
+.wbs-two-column,
+.deliverable-grid,
+.roles-graph-grid {
+  gap: .85rem;
+}
+
+.objective-wheel {
+  gap: .7rem;
+}
+
+.objective-wheel article,
+.scope-card,
+.role-detail,
+.graph-card,
+.tree-panel,
+.schedule-panel {
+  border-radius: 1.05rem;
+  padding: .8rem;
+}
+
+.objective-wheel strong {
+  font-size: 1.45rem;
+  margin-bottom: .25rem;
+}
+
+.scope-visual {
+  min-height: clamp(14rem, 24vw, 18rem);
+  max-height: 20rem;
+}
+
+.donut {
+  width: 6.2rem;
+  height: 6.2rem;
+}
+
+.donut:before {
+  width: 3.85rem;
+  height: 3.85rem;
+}
+
+.donut span {
+  font-size: 1.1rem;
+}
+
+.big-cost {
+  font-size: 1.9rem;
+  margin: .45rem 0;
+}
+
+.wbs-intro {
+  max-width: 680px;
+  margin-bottom: .8rem;
+}
+
+.wbs-diagram,
+.tree-deliverable,
+.package-branch,
+.cost-chart,
+.timeline {
+  gap: .55rem;
+}
+
+.program-box {
+  width: min(520px, 100%);
+  gap: .28rem;
+  padding: .85rem;
+  border-radius: 1rem;
+}
+
+.program-box strong {
+  font-size: clamp(1.05rem, 2.3vw, 1.55rem);
+}
+
+.tree-connector {
+  height: 1.45rem;
+}
+
+.tree-connector:before {
+  top: -1.45rem;
+  height: 1.45rem;
+}
+
+.tree-deliverable:before {
+  top: -.8rem;
+  height: .8rem;
+}
+
+.deliverable-box {
+  min-height: 6rem;
+  gap: .35rem;
+  padding: .72rem;
+  border-radius: .95rem;
+}
+
+.level-badge {
+  padding: .28rem .52rem;
+}
+
+.package-branch {
+  padding-top: .7rem;
+}
+
+.package-box,
+.package-milestone,
+.task {
+  padding: .58rem;
+  border-radius: .75rem;
+}
+
+.gantt-calendar {
+  gap: .18rem;
+}
+
+.gantt-label,
+.week-cell {
+  min-height: 1.65rem;
+  padding: .25rem .35rem;
+}
+
+.gantt-track {
+  min-height: 2.2rem;
+}
+
+.gantt-bar {
+  top: .32rem;
+  bottom: .32rem;
+}
+
+.schedule-legend {
+  margin-top: .7rem;
+}
+
+.roles-graph-grid .bar-chart {
+  min-height: 32rem;
+}
+
+.roles-graph-grid .bar-plot {
+  height: 22rem;
+  padding-top: 1.8rem;
+}
+
+.bar-x-labels span {
+  -webkit-line-clamp: 2;
+}
+
+footer {
+  padding: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  body {
+    font-size: 14.5px;
+  }
+
+  .hero-grid {
+    padding-top: 1.6rem;
+    padding-bottom: 1.8rem;
+  }
+
+  .image-card,
+  .scope-visual {
+    max-height: 19rem;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+  }
+
+  .topbar,
+  .hero-grid,
+  main {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+
+  .panel {
+    border-radius: 1rem;
+    padding: .85rem;
+  }
+
+  .image-card,
+  .scope-visual {
+    min-height: 13rem;
+    max-height: 16rem;
+  }
+
+  .roles-graph-grid .bar-chart {
+    min-height: 29rem;
+  }
+
+  .roles-graph-grid .bar-plot {
+    height: 20rem;
+  }
+}
