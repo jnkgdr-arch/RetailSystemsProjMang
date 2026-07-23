@@ -67,12 +67,12 @@ function showRole(index){
 function renderWbs(){
   const diagram = document.getElementById('timeline');
   const deliverables = wbs.map((phase, index)=>{
-    const levelNumber = phase[0].split('.')[0];
+    const phaseNumber = `2.${index + 1}`;
     return `
       <article class="tree-deliverable open">
         <button class="deliverable-box" aria-expanded="true">
-          <span class="level-badge">Level 2.${levelNumber}</span>
-          <span class="level-title">${phase[0]}</span>
+          <span class="level-badge">${phaseNumber}</span>
+          <span class="level-title">${phase[0].replace(/^\d+\.\s*/, '')}</span>
           <strong>${phase[1].length} work packages</strong>
         </button>
         <div class="package-branch">
@@ -83,7 +83,7 @@ function renderWbs(){
               <em>${task[2]}</em>
               <small>${task[3]}</small>
             </div>`).join('')}
-          <div class="milestone package-milestone">◆ Milestone: ${phase[2]}</div>
+          <div class="milestone package-milestone">◆ ${phase[2]}</div>
         </div>
       </article>`;
   }).join('');
@@ -105,29 +105,34 @@ function renderWbs(){
 
   diagram.innerHTML = `
     <div class="wbs-two-column">
-      <section class="tree-panel" aria-label="Connected WBS tree">
-        <div class="program-box">
-          <span class="level-badge">Level 1</span>
-          <strong>Retail Inventory Management System Implementation</strong>
-          <small>Main project / program</small>
-        </div>
-        <div class="tree-connector" aria-hidden="true"></div>
-        <div class="deliverable-grid">${deliverables}</div>
-      </section>
       <section class="schedule-panel" aria-label="Project timeline mini Gantt chart">
-      <div class="section-heading">
-        <p class="eyebrow">Project Timeline / Schedule</p>
-        <h3>Mini Gantt view by WBS phase</h3>
-      </div>
-      <div class="gantt-calendar">
-        <div class="gantt-label heading">WBS Phase</div>
-        ${Array.from({length: 36}, (_, i) => `<div class="week-cell">W${i + 1}</div>`).join('')}
-        ${scheduleRows}
-      </div>
-      <div class="schedule-legend">
-        <span><i class="legend-bar"></i> Activity window</span>
-        <span><i class="legend-mile">◆</i> Milestone checkpoint</span>
-      </div>
+        <div class="section-heading">
+          <p class="eyebrow">Project Timeline / Schedule</p>
+          <h3>Mini Gantt view by WBS phase</h3>
+        </div>
+        <div class="gantt-calendar">
+          <div class="gantt-label heading">WBS Phase</div>
+          ${Array.from({length: 36}, (_, i) => `<div class="week-cell">W${i + 1}</div>`).join('')}
+          ${scheduleRows}
+        </div>
+        <div class="schedule-legend">
+          <span><i class="legend-bar"></i> Activity window</span>
+          <span><i class="legend-mile">◆</i> Milestone checkpoint</span>
+        </div>
+      </section>
+      <section class="tree-panel" aria-label="Connected WBS tree">
+        <div class="wbs-scroll-hint">Scroll horizontally to view the full WBS hierarchy</div>
+        <div class="wbs-scroll-container">
+          <div class="wbs-tree">
+            <div class="program-box">
+              <span class="level-badge">Level 1</span>
+              <strong>Retail Inventory Management System Implementation</strong>
+              <small>Main project / program</small>
+            </div>
+            <div class="tree-connector" aria-hidden="true"></div>
+            <div class="deliverable-grid">${deliverables}</div>
+          </div>
+        </div>
       </section>
     </div>`;
 
