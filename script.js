@@ -105,6 +105,21 @@ function renderWbs(){
 
   diagram.innerHTML = `
     <div class="wbs-two-column">
+      <section class="schedule-panel" aria-label="Project timeline mini Gantt chart">
+        <div class="section-heading">
+          <p class="eyebrow">Project Timeline / Schedule</p>
+          <h3>Mini Gantt view by WBS phase</h3>
+        </div>
+        <div class="gantt-calendar">
+          <div class="gantt-label heading">WBS Phase</div>
+          ${Array.from({length: 36}, (_, i) => `<div class="week-cell">W${i + 1}</div>`).join('')}
+          ${scheduleRows}
+        </div>
+        <div class="schedule-legend">
+          <span><i class="legend-bar"></i> Activity window</span>
+          <span><i class="legend-mile">◆</i> Milestone checkpoint</span>
+        </div>
+      </section>
       <section class="tree-panel" aria-label="Connected WBS tree">
         <div class="program-box">
           <span class="level-badge">Level 1</span>
@@ -113,21 +128,6 @@ function renderWbs(){
         </div>
         <div class="tree-connector" aria-hidden="true"></div>
         <div class="deliverable-grid">${deliverables}</div>
-      </section>
-      <section class="schedule-panel" aria-label="Project timeline mini Gantt chart">
-      <div class="section-heading">
-        <p class="eyebrow">Project Timeline / Schedule</p>
-        <h3>Mini Gantt view by WBS phase</h3>
-      </div>
-      <div class="gantt-calendar">
-        <div class="gantt-label heading">WBS Phase</div>
-        ${Array.from({length: 36}, (_, i) => `<div class="week-cell">W${i + 1}</div>`).join('')}
-        ${scheduleRows}
-      </div>
-      <div class="schedule-legend">
-        <span><i class="legend-bar"></i> Activity window</span>
-        <span><i class="legend-mile">◆</i> Milestone checkpoint</span>
-      </div>
       </section>
     </div>`;
 
