@@ -1813,3 +1813,168 @@ main > .scope-panel .donut:before {
     display: block;
   }
 }
+
+/* Readability refinements for compact WBS, outcomes, and cost graphs */
+main > .objectives .objective-wheel {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .55rem;
+}
+
+main > .objectives .objective-wheel article {
+  min-width: 0;
+  padding: .68rem;
+}
+
+main > .objectives .objective-wheel article:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+main > .objectives .objective-wheel strong {
+  font-size: 1.18rem;
+  margin-bottom: .18rem;
+}
+
+main > .objectives .objective-wheel span {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: .78rem;
+  line-height: 1.25;
+}
+
+.wbs-tree .deliverable-box {
+  min-height: 5.6rem;
+}
+
+.wbs-tree .deliverable-box .level-title,
+.wbs-tree .package-box span,
+.wbs-tree .package-box em {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: initial;
+  -webkit-box-orient: initial;
+  text-overflow: clip;
+}
+
+.wbs-tree .deliverable-box .level-title {
+  font-size: .72rem;
+  line-height: 1.12;
+}
+
+.wbs-tree .deliverable-box strong {
+  font-size: .66rem;
+}
+
+.wbs-tree .package-box {
+  min-height: 8.25rem;
+  align-content: start;
+  padding: .38rem;
+}
+
+.wbs-tree .package-box b,
+.wbs-tree .package-box span,
+.wbs-tree .package-box em,
+.wbs-tree .package-box small,
+.wbs-tree .package-milestone {
+  font-size: .58rem;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.wbs-tree .package-box small {
+  white-space: normal;
+}
+
+.roles-graph-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+}
+
+.roles-graph-grid .graph-card {
+  padding: .75rem;
+}
+
+.roles-graph-grid .bar-chart {
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  min-height: 27rem;
+  gap: .45rem .55rem;
+}
+
+.roles-graph-grid .bar-plot {
+  height: 17rem;
+  padding: 1.7rem .55rem 0;
+}
+
+.chart-bars,
+.bar-x-labels {
+  gap: .35rem;
+}
+
+.chart-bar i {
+  width: min(100%, 2rem);
+}
+
+.chart-bar .bar-value {
+  max-width: 4.1rem;
+  font-size: .62rem;
+  bottom: calc(var(--height) + .22rem);
+}
+
+.bar-y-axis {
+  font-size: .62rem;
+}
+
+.bar-x-labels {
+  padding: .38rem .55rem 0;
+}
+
+.bar-x-labels span {
+  display: block;
+  min-height: 2.9rem;
+  overflow: visible;
+  -webkit-line-clamp: initial;
+  -webkit-box-orient: initial;
+  font-size: .56rem;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+@media (max-width: 1180px) {
+  .roles-graph-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roles-graph-grid .bar-chart {
+    min-height: 29rem;
+  }
+
+  .roles-graph-grid .bar-plot {
+    height: 19rem;
+  }
+}
+
+@media (max-width: 700px) {
+  main > .objectives .objective-wheel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .roles-graph-grid .bar-chart {
+    grid-template-columns: 4rem minmax(0, 1fr);
+    min-height: 28rem;
+  }
+
+  .roles-graph-grid .bar-plot {
+    height: 18rem;
+  }
+}
+
+@media (max-width: 480px) {
+  main > .objectives .objective-wheel {
+    grid-template-columns: 1fr;
+  }
+
+  main > .objectives .objective-wheel article:nth-child(5) {
+    grid-column: auto;
+  }
+}
