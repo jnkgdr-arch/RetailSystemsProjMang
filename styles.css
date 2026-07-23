@@ -1562,3 +1562,254 @@ footer {
     height: 20rem;
   }
 }
+
+/* Executive three-column dashboard layout */
+main {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .95rem;
+  align-items: start;
+}
+
+main > .panel {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+main > .roles-panel,
+main > .wbs-panel {
+  grid-column: 1 / -1;
+  height: auto;
+}
+
+main > .section-grid,
+main > .scope-panel .scope-grid {
+  grid-template-columns: 1fr;
+}
+
+main > .section-grid {
+  gap: .75rem;
+}
+
+main > .scope-panel .scope-visual {
+  min-height: 10rem;
+  max-height: 13rem;
+}
+
+main > .scope-panel .donut {
+  width: 4.9rem;
+  height: 4.9rem;
+  right: .65rem;
+  bottom: .65rem;
+}
+
+main > .scope-panel .donut:before {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Compact horizontal WBS hierarchy */
+.wbs-panel {
+  overflow: hidden;
+}
+
+.wbs-scroll-hint {
+  display: none;
+  margin-bottom: .45rem;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 900;
+  text-align: right;
+}
+
+.wbs-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: .15rem .1rem .6rem;
+  scrollbar-color: rgba(255, 209, 102, .7) rgba(255, 255, 255, .08);
+}
+
+.wbs-scroll-container::-webkit-scrollbar {
+  height: .65rem;
+}
+
+.wbs-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, .08);
+  border-radius: 999px;
+}
+
+.wbs-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 209, 102, .7);
+  border-radius: 999px;
+}
+
+.wbs-tree {
+  position: relative;
+  min-width: 1420px;
+  padding: 0 .3rem .25rem;
+}
+
+.wbs-tree .program-box {
+  width: min(430px, 100%);
+  min-height: 4.4rem;
+  padding: .65rem .85rem;
+}
+
+.wbs-tree .tree-connector {
+  width: calc((100% / 9) * 8 + 1.2rem);
+  height: 1.35rem;
+  margin-top: 1.35rem;
+  margin-bottom: 0;
+}
+
+.wbs-tree .tree-connector:before {
+  top: -1.35rem;
+  height: 1.35rem;
+}
+
+.wbs-tree .deliverable-grid {
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: .45rem;
+  align-items: start;
+}
+
+.wbs-tree .tree-deliverable {
+  gap: .45rem;
+}
+
+.wbs-tree .tree-deliverable:before {
+  top: -1.35rem;
+  height: 1.35rem;
+}
+
+.wbs-tree .deliverable-box {
+  min-height: 6.5rem;
+  padding: .55rem .45rem;
+  gap: .24rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.wbs-tree .deliverable-box .level-title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 1.12;
+}
+
+.wbs-tree .deliverable-box strong {
+  font-size: .74rem;
+}
+
+.wbs-tree .level-badge {
+  padding: .22rem .45rem;
+  font-size: .72rem;
+}
+
+.wbs-tree .package-branch {
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .34rem;
+  padding-top: .75rem;
+}
+
+.wbs-tree .package-branch:before {
+  top: 0;
+  left: 50%;
+  height: .75rem;
+}
+
+.wbs-tree .package-box,
+.wbs-tree .package-milestone {
+  margin-left: 0;
+}
+
+.wbs-tree .package-box:before,
+.wbs-tree .package-box:after,
+.wbs-tree .package-milestone:before,
+.wbs-tree .package-milestone:after {
+  display: none;
+}
+
+.wbs-tree .package-box {
+  grid-template-columns: 1fr;
+  min-height: 7.4rem;
+  gap: .22rem;
+  padding: .45rem;
+  text-align: center;
+}
+
+.wbs-tree .package-box span,
+.wbs-tree .package-box em {
+  grid-column: auto;
+}
+
+.wbs-tree .package-box b,
+.wbs-tree .package-box span,
+.wbs-tree .package-box em,
+.wbs-tree .package-box small,
+.wbs-tree .package-milestone {
+  font-size: .68rem;
+  line-height: 1.16;
+}
+
+.wbs-tree .package-box span,
+.wbs-tree .package-box em {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.wbs-tree .package-box small {
+  justify-self: center;
+  padding: .18rem .34rem;
+}
+
+.wbs-tree .package-milestone {
+  grid-column: 1 / -1;
+  margin-top: 0;
+  padding: .42rem;
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  main > .roles-panel,
+  main > .wbs-panel {
+    grid-column: 1 / -1;
+  }
+
+  .wbs-scroll-hint {
+    display: block;
+  }
+}
+
+@media (max-width: 700px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  main > .roles-panel,
+  main > .wbs-panel {
+    grid-column: auto;
+  }
+
+  .wbs-tree {
+    min-width: 1380px;
+  }
+}
+
+@media (max-width: 700px) {
+  .wbs-tree .tree-connector,
+  .wbs-tree .tree-connector:before,
+  .wbs-tree .tree-deliverable:before {
+    display: block;
+  }
+}
